@@ -134,4 +134,4 @@ tests/config.py
 indicators/
 
 # config
-config/
+config/config.ini
