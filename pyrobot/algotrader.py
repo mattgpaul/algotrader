@@ -11,7 +11,7 @@ from pyrobot.indicators import Indicators
 
 # Grab the config file values
 config = ConfigParser()
-config.read('configs/config.ini')
+config.read('config/config.ini')
 
 CLIENT_ID = config.get('main', 'CLIENT_ID')
 REDIRECT_URI = config.get('main', 'REDIRECT_URI')
@@ -27,4 +27,27 @@ algotrader = PyRobot(
     paper_trading=True
 )
 
+# Create a new portfolio
+algotrader_portfolio = algotrader.create_portfolio()
 
+# Add multiple positions to our portfolio.
+multi_position = [
+    {
+        'asset_type': "equity",
+        'quantity': 2,
+        'purchase_price': 4.00,
+        'symbol': 'TSLA',
+        'purchase_date': '2020-01-31'
+    },
+    {
+        'asset_type': "equity",
+        'quantity': 2,
+        'purchase_price': 4.00,
+        'symbol': 'SQ',
+        'purchase_date': '2020-01-31'
+    }
+]
+
+# Add those positionss to the Portfolio.
+new_positions = algotrader.portfolio.add_positions(positions=multi_position)
+pprint.pprint(new_positions)
